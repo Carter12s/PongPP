@@ -56,6 +56,7 @@ int main(){
     initscr();
     noecho();
     keypad(stdscr,true);
+    nodelay(stdscr,1);
     curs_set(FALSE);
     start_color();
     init_pair(1,COLOR_WHITE,COLOR_BLACK);
@@ -80,52 +81,52 @@ int main(){
     Pong p;
 
 
-    nodelay(master_win,1); //Disalbe blocking on wgetch();
-    while(run){
-        int chr = wgetch(master_win);
-        //LOG(INFO) << "Got Chr: " << chr;
-        switch(chr){
-        case KEY_UP: y2--; break;
-        case KEY_DOWN: y2++; break;
-        case 'a': y1++; break;
-        case 'q': y1--; break;
-        case 'p': wgetch(master_win); break;
-        case 27: endwin(); run = false; break; // Esc
+//    nodelay(master_win,1); //Disalbe blocking on wgetch();
+//    while(run){
+//        int chr = wgetch(master_win);
+//        //LOG(INFO) << "Got Chr: " << chr;
+//        switch(chr){
+//        case KEY_UP: y2--; break;
+//        case KEY_DOWN: y2++; break;
+//        case 'a': y1++; break;
+//        case 'q': y1--; break;
+//        case 'p': wgetch(master_win); break;
+//        case 27: endwin(); run = false; break; // Esc
 
-        }
+//        }
 
-        //Collisions for Ball
-        if(by > maxy -1 || by < 1){
-            bvy = -bvy;
-        }
-        if(bx > maxx -1){
-            if(by > y2 && by < y2+2){
-                bvx = -bvx;
-            }
-        }
-        if(bx < 1){
-            if(by>y1&&by<y1+2){
-                bvx = -bvx;
-            }
-        }
-        bx = bx + bvx;
-        by = by + bvy;
+//        //Collisions for Ball
+//        if(by > maxy -1 || by < 1){
+//            bvy = -bvy;
+//        }
+//        if(bx > maxx -1){
+//            if(by > y2 && by < y2+2){
+//                bvx = -bvx;
+//            }
+//        }
+//        if(bx < 1){
+//            if(by>y1&&by<y1+2){
+//                bvx = -bvx;
+//            }
+//        }
+//        bx = bx + bvx;
+//        by = by + bvy;
 
 
 
-        werase(master_win);
+//        werase(master_win);
 
-        box(master_win,0,0);
-        LOG_IF(mvwprintw(master_win,by,bx,"O"),ERROR) << "Bad Ball Position Cast";
+//        box(master_win,0,0);
+//        LOG_IF(mvwprintw(master_win,by,bx,"O"),ERROR) << "Bad Ball Position Cast";
 
-        for(short int i=-1;i<2;i++){
-                        mvwprintw(master_win,y1+i,2,"|");
-                        mvwprintw(master_win,y2+i,maxx-3,"|");}
+//        for(short int i=-1;i<2;i++){
+//                        mvwprintw(master_win,y1+i,2,"|");
+//                        mvwprintw(master_win,y2+i,maxx-3,"|");}
 
-        wrefresh(master_win);
-        usleep(10000);//100 Hz?
-    }
-    LOG(INFO) << "Exiting";
+//        wrefresh(master_win);
+//        usleep(10000);//100 Hz?
+//    }
+//    LOG(INFO) << "Exiting";
 
 }
 
